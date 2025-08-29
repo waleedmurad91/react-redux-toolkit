@@ -140,11 +140,24 @@ const handleSearch = (e)=>{
     )
   })
 }
+ useEffect(() => {
+    const hasArchived = todos
+  .filter(todo => todo.id !== 0) // ignore id 0
+  .every(todo => todo.archived === false); 
+    if(hasArchived){
+      const archivedOverlay = document.getElementById('notesOverlay');
+      archivedOverlay.style.display = 'none';
+    }
+  }, [todos]);
   return (
     <>
              {todos.length > 0}
-             {todos.filter(todo => todo.id !== 0 && todo.archived === true).map((todo) => (
-          <div id="archive-notes-list-button" onClick={()=>{showarchivedNotes()}}><button >Archived Notes</button></div>))}
+           {todos.filter(todo => todo.id !== 0).some(todo => todo.archived === true) && (
+  <div id="archive-notes-list-button" onClick={() => showarchivedNotes()}>
+    <button>Archived Notes</button>
+  </div>
+)}
+
        <div className="search-template">
        <input
           type="text"
