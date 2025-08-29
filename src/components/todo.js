@@ -162,7 +162,7 @@ const handleSearch = (e)=>{
        <input
           type="text"
           id='search-input'
-          placeholder=""
+          placeholder=" "
           value={searchTerm}
           onChange={handleSearch}
         />
